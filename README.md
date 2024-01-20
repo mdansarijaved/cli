@@ -1,1 +1,1 @@
-# Cli tool for Younicorn Project a selft hosting cloud solution for everyone
+# Cli tool for Younicorn Project a self hosting cloud solution for everyone
