@@ -24,7 +24,7 @@ func main() {
 	░░░██║░░░╚█████╔╝╚██████╔╝██║░╚███║██║╚█████╔╝╚█████╔╝██║░░██║██║░╚███║
 	░░░╚═╝░░░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═╝░╚════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░╚══╝`)
 
-	fmt.Println("Installing Nodejs and Pm2")
+	fmt.Println("Installing Nodejs and Pm2 ✅")
 	if _, err := exec.Command("node", "-v").Output(); err != nil {
 
 		nodeInstall := exec.Command("bash", "-c", "curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs")
@@ -45,7 +45,7 @@ func main() {
 			fmt.Println("Node installed")
 		}
 	} else {
-		fmt.Println("Node already installed")
+		fmt.Println("Node already installed ✅")
 	}
 
 	pnpmInstall := exec.Command("bash", "-c", "sudo npm install -g pnpm")
@@ -62,7 +62,7 @@ func main() {
 		log.Fatal(err)
 	} else {
 		pnpmSpinner.Stop()
-		fmt.Println("Pnpm installed")
+		fmt.Println("Pnpm installed ✅")
 	}
 
 	if _, err := exec.Command("pm2", "-v").Output(); err != nil {
@@ -85,7 +85,7 @@ func main() {
 			fmt.Println("Pm2 installed")
 		}
 	} else {
-		fmt.Println("Pm2 already installed")
+		fmt.Println("Pm2 already installed ✅")
 	}
 
 	if _, err := exec.Command("nginx", "-v").Output(); err != nil {
@@ -103,10 +103,10 @@ func main() {
 			log.Fatal(err)
 		} else {
 			nginxSpinner.Stop()
-			fmt.Println("Nginx installed")
+			fmt.Println("Nginx installed ✅")
 		}
 	} else {
-		fmt.Println("Nginx already installed")
+		fmt.Println("Nginx already installed ✅")
 	}
 
 	if _, err := exec.Command("git", "--version").Output(); err != nil {
@@ -125,10 +125,10 @@ func main() {
 		} else {
 
 			gitSpinner.Stop()
-			fmt.Println("Git installed")
+			fmt.Println("Git installed ✅")
 		}
 	} else {
-		fmt.Println("Git already installed")
+		fmt.Println("Git already installed  ✅")
 	}
 
 	YounicornClone := exec.Command("bash", "-c", "cd / && git clone https://github.com/kratos-respawned/Younicorn.git")
@@ -145,7 +145,7 @@ func main() {
 		log.Fatal(err)
 	} else {
 		YounicornSpinner.Stop()
-		fmt.Println("Younicorn cloned")
+		fmt.Println("Younicorn cloned ✅✅✅")
 
 	}
 	userinput.GetEnv()
@@ -172,7 +172,7 @@ func main() {
 		log.Fatal(err.Error())
 	} else {
 		npmInstallspinner.Stop()
-		fmt.Println("Install success!!!!!!")
+		fmt.Println("Install success!!!🐱‍👤🐱‍👤🐱‍👤 ")
 	}
 
 	npmBuild := exec.Command("bash", "-c", "cd /Younicorn && sudo pnpm build")
@@ -191,7 +191,7 @@ func main() {
 		log.Fatal(err.Error())
 	} else {
 		npmBuildspinner.Stop()
-		fmt.Println("Build success!!!!!!")
+		fmt.Println("Build success!!!!🐱‍👤🐱‍👤🐱‍👤")
 	}
 
 }
