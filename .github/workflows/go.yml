@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,23 +19,24 @@ jobs:
       - name: Build
         run: go build -v -o myapp main.go
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get release
+        id: get_release
+        uses: actions/github-script@v5
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+          script: |
+            const releases = await github.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const uploadUrl = releases.data[0].upload_url;
+            return uploadUrl;
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.result }}
           asset_path: ./myapp
           asset_name: myapp
           asset_content_type: application/octet-stream
