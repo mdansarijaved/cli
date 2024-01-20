@@ -40,6 +40,23 @@ func main() {
 		fmt.Println("Node already installed")
 	}
 
+	pnpmInstall := exec.Command("bash", "-c", "sudo npm install -g pnpm")
+
+	if err := pnpmInstall.Start(); err != nil {
+		log.Fatal(err)
+	}
+
+	pnpmSpinner := spinner.New(spinner.CharSets[39], 100*time.Millisecond) // Build our new spinner
+	pnpmSpinner.Start()                                                    // Start the spinner
+
+	if err := pnpmInstall.Wait(); err != nil {
+		pnpmSpinner.Stop()
+		log.Fatal(err)
+	} else {
+		pnpmSpinner.Stop()
+		fmt.Println("Pnpm installed")
+	}
+
 	if _, err := exec.Command("pm2", "-v").Output(); err != nil {
 		InstallPm2 := exec.Command("bash", "-c", "sudo npm install -g pm2")
 
@@ -126,7 +143,7 @@ func main() {
 	userinput.GetEnv()
 	// Wait for the command to finish
 
-	npmInstall := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i ")
+	npmInstall := exec.Command("bash", "-c", "cd / && cd Younicorn && pnpm i ")
 	cwd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
@@ -150,7 +167,7 @@ func main() {
 		fmt.Println("Install success!!!!!!")
 	}
 
-	npmBuild := exec.Command("bash", "-c", "sudo npm run build")
+	npmBuild := exec.Command("bash", "-c", "cd /Younicorn && sudo pnpm build")
 
 	if err := npmBuild.Start(); err != nil {
 		log.Fatal(err)
