@@ -42,7 +42,7 @@ func main() {
 			log.Fatal(err)
 		} else {
 			nodespinner.Stop()
-			fmt.Println("Node installed")
+			fmt.Println("Node installed ✅")
 		}
 	} else {
 		fmt.Println("Node already installed ✅")
