@@ -115,12 +115,6 @@ func main() {
 	YounicornSpinner := spinner.New(spinner.CharSets[39], 100*time.Millisecond) // Build our new spinner
 	YounicornSpinner.Start()                                                    // Start the spinner
 
-	cwd, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Current Working Directory:", cwd)
-
 	if err := YounicornClone.Wait(); err != nil {
 		YounicornSpinner.Stop()
 		log.Fatal(err)
@@ -132,10 +126,28 @@ func main() {
 	userinput.GetEnv()
 	// Wait for the command to finish
 
-	npmRun := exec.Command("bash", "-c", "cd Younicorn && npm i && npm run build")
+	npmRun := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i && npm run build")
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Current Working Directory:", cwd)
 
 	if err := npmRun.Start(); err != nil {
 		log.Fatal(err)
+	}
+
+	npmInstallspinner := spinner.New(spinner.CharSets[39], 100*time.Millisecond)
+
+	npmInstallspinner.Start()
+
+	if err := npmRun.Wait(); err != nil {
+
+		npmInstallspinner.Stop()
+		log.Fatal(err)
+	} else {
+		npmInstallspinner.Stop()
+		fmt.Println("Install and Build success!!!!!!")
 	}
 
 }
