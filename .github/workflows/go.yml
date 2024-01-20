@@ -16,10 +16,10 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.21
+          go-version: 1.21.5
 
       - name: Build
-        run: go build -v .
+        run: go build -v main.go
 
       - name: Create Release
         id: create_release
@@ -38,4 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PAT }} # replace MY_PAT with the name of your secret
         with:
-          files: ./main # replace with the path to your asset
+          files: ./main
