@@ -23,21 +23,19 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: elgohr/Github-Release-Action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PAT }} # replace MY_PAT with the name of your secret
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+          args: |
+            ${{ github.ref }}
+            Release ${{ github.ref }}
+            false
+            false
 
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PAT }} # replace MY_PAT with the name of your secret
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./main
-          asset_name: main
-          asset_content_type: application/octet-stream
+          files: ./main # replace with the path to your asset
