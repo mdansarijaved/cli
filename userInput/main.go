@@ -33,7 +33,7 @@ func GetEnv() {
 
 	// Get each environment variable from the user
 	for _, envVar := range envVars {
-		fmt.Printf("Enter %s: ", envVar)
+		fmt.Printf("? \033[35mEnter %s: \033[0m ? ", envVar)
 		value, _ := reader.ReadString('\n')
 
 		// Write the environment variable to the file
@@ -43,5 +43,5 @@ func GetEnv() {
 		}
 	}
 
-	fmt.Println("Environment variables saved to .env")
+	fmt.Println("Environment variables saved to .env ✅✅✅")
 }
