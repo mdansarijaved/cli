@@ -4,6 +4,7 @@ This is a command-line interface (CLI) tool for self hosting your project using 
 
 
 ## Installation
+on you ubuntu server run the following command to install the cli tool
 
 ```bash
 wget https://github.com/mdansarijaved/cli/releases/download/v1.1.5/main
