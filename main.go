@@ -126,14 +126,14 @@ func main() {
 	userinput.GetEnv()
 	// Wait for the command to finish
 
-	npmRun := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i && sudo npm run build")
+	npmInstall := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i ")
 	cwd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Current Working Directory:", cwd)
 
-	if err := npmRun.Start(); err != nil {
+	if err := npmInstall.Start(); err != nil {
 		log.Fatal(err)
 	}
 
@@ -141,13 +141,32 @@ func main() {
 
 	npmInstallspinner.Start()
 
-	if err := npmRun.Wait(); err != nil {
+	if err := npmInstall.Wait(); err != nil {
 
 		npmInstallspinner.Stop()
-		log.Fatal(err)
+		log.Fatal(err.Error())
 	} else {
 		npmInstallspinner.Stop()
-		fmt.Println("Install and Build success!!!!!!")
+		fmt.Println("Install success!!!!!!")
+	}
+
+	npmBuild := exec.Command("bash", "-c", "sudo npm run build")
+
+	if err := npmBuild.Start(); err != nil {
+		log.Fatal(err)
+	}
+
+	npmBuildspinner := spinner.New(spinner.CharSets[39], 100*time.Millisecond)
+
+	npmBuildspinner.Start()
+
+	if err := npmBuild.Wait(); err != nil {
+
+		npmBuildspinner.Stop()
+		log.Fatal(err.Error())
+	} else {
+		npmBuildspinner.Stop()
+		fmt.Println("Build success!!!!!!")
 	}
 
 }

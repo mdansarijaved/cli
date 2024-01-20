@@ -21,6 +21,7 @@ func GetEnv() {
 		"NEXTAUTH_URL",
 		"ADMIN_MAIL",
 		"ADMIN_PASS",
+		"DOMAIN",
 	}
 
 	// Open the .env file
