@@ -1,4 +1,4 @@
-# Cli tool for Younicorn Project a self hosting cloud solution for everyone
+# CLI tool for Younicorn Project a self hosting cloud solution for everyone
 
 This is a command-line interface (CLI) tool for self hosting your project using you own VPS.
 
