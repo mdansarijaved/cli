@@ -126,7 +126,7 @@ func main() {
 	userinput.GetEnv()
 	// Wait for the command to finish
 
-	npmRun := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i && npm run build")
+	npmRun := exec.Command("bash", "-c", "cd / && cd Younicorn && npm i && sudo npm run build")
 	cwd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
